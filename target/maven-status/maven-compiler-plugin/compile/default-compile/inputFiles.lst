@@ -1,0 +1,8 @@
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/service/UserService.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/validation/UserValidation.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/controller/UserController.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/configure/MVCconfigure.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/pojo/User.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/MyApplication.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/dao/UserDao.java
+/home/bridgeit/work-space/spring-boot-demo/src/main/java/com/bridgelabz/utility/PasswordEncrypt.java
