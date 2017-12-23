@@ -2,11 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title th:text="#{app.title}">Title</title>
+<title>ToDo</title>
 <link rel="stylesheet" th:href="@{/css/styles.css}" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
-	<h1 th:text="#{app.create-user}">Create</h1>
+<div class="row" style="width:1300px">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4" style="background-color: rgb(66, 203, 244); margin-top: 50px;" >
+	<h1>Create</h1>
 	<form action="#" th:action="@{/save}" th:object="${user}" method="POST">
 	<div class="form-group" style="margin-left: 5px">
 		Name: <input type="text" th:field="*{userName}" /><br/>
@@ -21,5 +25,8 @@
 		<input type="reset" th:value="#{user.form.reset}" />
 		</div>
 	</form>
+	</div>
+	<div class="col-sm-4"></div>
+	</div>
 </body>
 </html>

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+<title>ToDo</title>
       <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
    <form action="#" th:action="@{/login}" th:object="${user}" method="POST">
         Email: <input type="text" th:field="*{userEmail}" /><br/>
 		Password: <input type="password" th:field="*{userPassword}" /><br/>
+		<input type="submit" th:value="#{user.form.submit}" />
    </form>
    
 	<a href="#" th:href="@{/register}">Register</a>

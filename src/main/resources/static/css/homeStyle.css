@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#card{
+	
+	min-height: 40px;
+	width:350px;
+	padding:10px;
+	padding-bottom: 10px;
+	margin-top:10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	display: inline-block;
+	word-break: break-all;
+}

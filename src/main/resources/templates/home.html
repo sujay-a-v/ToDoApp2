@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/homeStyle.css}" />
+<meta charset="UTF-8"/>
+<title>ToDo</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<div  id="card">	
+
+		<div th:text="${user1.userName}"></div>
+		<div th:text="${user1.userEmail}"></div>	
+		
+		
+		
+		<h1 th:text="#{app.user-details}">Details</h1>
+    <table>
+        <tr>
+           <th th:text="${user.userName}"></th>
+           <th th:text="${user.userEmail}"></th>
+          
+        </tr>
+        	
+	</table>			
+</div>
+
+</body>
+</html>
