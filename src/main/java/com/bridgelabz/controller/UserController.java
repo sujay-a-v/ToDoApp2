@@ -1,26 +1,24 @@
 package com.bridgelabz.controller;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bridgelabz.pojo.Notes;
 import com.bridgelabz.pojo.User;
+import com.bridgelabz.service.NotesService;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.utility.Token;
 import com.bridgelabz.validation.UserValidation;
@@ -33,10 +31,15 @@ public class UserController {
 	private UserService userService;
 	
 	@Autowired
+	private NotesService notesService;
+	
+	@Autowired
 	private UserValidation userValidation;
 	
 	@Autowired
 	private Token token;
+	
+	public static String email;
 	
 	@RequestMapping("/register")
 	public String registerForm(ModelMap modelMap) {
@@ -92,14 +95,47 @@ public class UserController {
 	
 	/*@PostMapping("/login")*/
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public String doLogin(User user) {
-		ModelMap modelMap=new ModelMap();
+	public ModelAndView doLogin(User user,HttpSession session) {
+	ModelMap modelMap=new ModelMap();
 	System.out.println(user.getUserEmail());
 	System.out.println(user.getUserPassword());
 	User user1=userService.checkUserData(user.getUserEmail(), user.getUserPassword());
+	ModelAndView modelAndView=new ModelAndView();
+	if(user1==null) {
+		modelAndView.setViewName("login");
+		return modelAndView;
+	}
+	email=user1.getUserEmail();
+	System.out.println("L5");
 	System.out.println("User from database   "+user1);
+	session.setAttribute("user", user1);
+	User noteUser=(User) session.getAttribute("user");
+	System.out.println("\n\n noteUser---> "+noteUser);
+	//List<Notes> notes=notesService.fetchAllNotes(noteUser);
+	//System.out.println("\n\n"+notes);
 	modelMap.put("user", user1);
-	return "home"; 
+	modelAndView.setViewName("home");
+	modelAndView.addObject("user1",user1);
+	
+	return modelAndView; 
+	}
+	
+	@RequestMapping(value="addNote",method = RequestMethod.POST)
+	public ResponseEntity<String> addNote(@RequestBody Notes note,HttpSession session) {
+		//User noteUser=(User) session.getAttribute("user");
+		
+		User noteUser=userService.getByEmail(email);
+		Date date = new Date();
+		note.setCreateDate(date);
+		note.setModifiedDate(date);
+		note.setUser(noteUser);
+		System.out.println("\n\n Note ---> "+note);
+		notesService.addUserNotes(note);
+		//System.out.println("\n\n Notes from DB \n");
+		//List<Notes> notes=notesService.fetchAllNotes(noteUser);
+		System.out.println("Ajjayya");
+		System.out.println("\n\n");
+		return new ResponseEntity("note Added",HttpStatus.OK);
 	}
 	
 	/*@RequestMapping("/allUser")

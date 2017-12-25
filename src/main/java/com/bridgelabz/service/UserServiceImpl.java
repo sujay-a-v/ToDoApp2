@@ -37,14 +37,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User checkUserData(String email, String password) {
-		// TODO Auto-generated method stub
+		System.out.println("L1");
 		return userDao.checkUserData(email, password);
 	}
 
 	@Override
 	public User retrieveById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.retrieveById(id);
 	}
 
 	@Override
@@ -55,14 +54,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userDao.getByEmail(email);
 	}
 
 	@Override
 	public String passwordReset(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userDao.passwordReset(user);
 	}
 
 }

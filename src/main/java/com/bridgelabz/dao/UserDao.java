@@ -2,6 +2,7 @@ package com.bridgelabz.dao;
 
 import java.util.List;
 
+import com.bridgelabz.pojo.Notes;
 import com.bridgelabz.pojo.User;
 
 public interface UserDao {
@@ -21,4 +22,9 @@ public interface UserDao {
 	public User getByEmail(String email);
 	
 	public String passwordReset(User user);
+	
+	
+	
+	public void addUserNotes(Notes notes);
+	public List<Notes> fetchAllNotes(User user);
 }

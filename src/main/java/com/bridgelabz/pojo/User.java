@@ -1,11 +1,16 @@
 package com.bridgelabz.pojo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -23,6 +28,10 @@ public class User {
 	   private String userPassword;
 	   @Transient
 	   private String confirmPassword;
+	   
+	   @OneToMany(mappedBy="user")
+		@JsonIgnore
+		private List<Notes> notes;
    
 	   public User() {
 		   
@@ -72,11 +81,17 @@ public class User {
 		public void setConfirmPassword(String confirmPassword) {
 			this.confirmPassword = confirmPassword;
 		}
+
+
 		@Override
 		public String toString() {
 			return "User [id=" + id + ", userName=" + userName + ", userEmail=" + userEmail + ", userMobile="
-					+ userMobile + ", userPassword=" + userPassword + ", confirmPassword=" + confirmPassword + "]";
+					+ userMobile + ", userPassword=" + userPassword + ", confirmPassword=" + confirmPassword
+					+ ", notes=" + notes + "]";
 		}
+		
+		
+		
 		   
 		
   
