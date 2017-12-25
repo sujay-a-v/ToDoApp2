@@ -131,7 +131,7 @@ public class UserController {
 		note.setUser(noteUser);
 		System.out.println("\n\n Note ---> "+note);
 		notesService.addUserNotes(note);
-		//System.out.println("\n\n Notes from DB \n");
+		//SSystem.out.println("\n\n Notes from DB \n");
 		//List<Notes> notes=notesService.fetchAllNotes(noteUser);
 		System.out.println("Ajjayya");
 		System.out.println("\n\n");
