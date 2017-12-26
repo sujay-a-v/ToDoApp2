@@ -23,8 +23,4 @@ public interface UserDao {
 	
 	public String passwordReset(User user);
 	
-	
-	
-	public void addUserNotes(Notes notes);
-	public List<Notes> fetchAllNotes(User user);
 }

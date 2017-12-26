@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User checkUserData(String email, String password) {
-		System.out.println("L1");
 		return userDao.checkUserData(email, password);
 	}
 

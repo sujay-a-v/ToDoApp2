@@ -97,8 +97,6 @@ public class UserController {
 	@RequestMapping(value="/login",method = RequestMethod.POST)
 	public ModelAndView doLogin(User user,HttpSession session) {
 	ModelMap modelMap=new ModelMap();
-	System.out.println(user.getUserEmail());
-	System.out.println(user.getUserPassword());
 	User user1=userService.checkUserData(user.getUserEmail(), user.getUserPassword());
 	ModelAndView modelAndView=new ModelAndView();
 	if(user1==null) {
@@ -106,22 +104,22 @@ public class UserController {
 		return modelAndView;
 	}
 	email=user1.getUserEmail();
-	System.out.println("L5");
-	System.out.println("User from database   "+user1);
+	
 	session.setAttribute("user", user1);
 	User noteUser=(User) session.getAttribute("user");
 	System.out.println("\n\n noteUser---> "+noteUser);
-	//List<Notes> notes=notesService.fetchAllNotes(noteUser);
-	//System.out.println("\n\n"+notes);
-	modelMap.put("user", user1);
+	List<Notes> notes=notesService.fetchAllNotes(noteUser);
+	
+	modelMap.put("user1", user1);
 	modelAndView.setViewName("home");
 	modelAndView.addObject("user1",user1);
+	modelAndView.addObject("notes",notes);
 	
 	return modelAndView; 
 	}
 	
 	@RequestMapping(value="addNote",method = RequestMethod.POST)
-	public ResponseEntity<String> addNote(@RequestBody Notes note,HttpSession session) {
+	public ResponseEntity<List<Notes>> addNote(@RequestBody Notes note,HttpSession session) {
 		//User noteUser=(User) session.getAttribute("user");
 		
 		User noteUser=userService.getByEmail(email);
@@ -129,13 +127,11 @@ public class UserController {
 		note.setCreateDate(date);
 		note.setModifiedDate(date);
 		note.setUser(noteUser);
-		System.out.println("\n\n Note ---> "+note);
 		notesService.addUserNotes(note);
 		//SSystem.out.println("\n\n Notes from DB \n");
-		//List<Notes> notes=notesService.fetchAllNotes(noteUser);
+		List<Notes> notes=notesService.fetchAllNotes(noteUser);
 		System.out.println("Ajjayya");
-		System.out.println("\n\n");
-		return new ResponseEntity("note Added",HttpStatus.OK);
+		return new ResponseEntity(notes,HttpStatus.OK);
 	}
 	
 	/*@RequestMapping("/allUser")

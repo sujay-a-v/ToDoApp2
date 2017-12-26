@@ -8,46 +8,34 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Component;
 
 import com.bridgelabz.pojo.Notes;
 import com.bridgelabz.pojo.User;
 import com.bridgelabz.service.NotesService;
 
-
-public class NotesDaoImpl implements NotesService {
+@Component
+public class NotesDaoImpl implements NotesDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
 	public void addUserNotes(Notes notes) {
-		System.out.println("Inside add note impl");
 		Session session=sessionFactory.openSession();
 		Transaction transaction=session.beginTransaction();
 		
-		System.out.println("Session open");
-		System.out.println("!@#");
-		session.save(notes);
-		System.out.println("^%^&%&");
-		transaction.commit();
-		System.out.println("HGG");
-		session.close();
-		System.out.println("HWH");
-		/*try
+		try
 		{
-			System.out.println("Before");
 			session.save(notes);
 			transaction.commit();
 			session.close();
-			System.out.println("After");
-
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			transaction.rollback();
 			session.close();
-		}*/
+		}
 	}
 
 	@Override
@@ -64,7 +52,6 @@ public class NotesDaoImpl implements NotesService {
 
 	@Override
 	public List<Notes> fetchAllNotes(User user) {
-		System.out.println("\n\nDeepak");
 		Session session=sessionFactory.openSession();
 		try
 		{
@@ -73,7 +60,6 @@ public class NotesDaoImpl implements NotesService {
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			List<Notes> list=criteria.list();
 			System.out.println(list.size());
-			System.out.println();
 			return list;
 		}
 		catch (Exception e) {

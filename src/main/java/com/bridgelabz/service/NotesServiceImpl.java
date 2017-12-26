@@ -15,17 +15,13 @@ import com.bridgelabz.pojo.User;
 @Service
 public class NotesServiceImpl implements NotesService {
 
-	/*@Autowired
-	private NotesDao notesDao;*/
-	
 	@Autowired
-	private UserDao userDao;
+	private NotesDao notesDao;
 	
-	NotesDaoImpl notesDao=new NotesDaoImpl();
 	
 	@Override
 	public void addUserNotes(Notes notes) {
-		userDao.addUserNotes(notes);
+		notesDao.addUserNotes(notes);
 
 	}
 
@@ -42,8 +38,7 @@ public class NotesServiceImpl implements NotesService {
 
 	@Override
 	public List<Notes> fetchAllNotes(User user) {
-		System.out.println("\n\n 3434\n\nSujay");
-		return userDao.fetchAllNotes(user);
+		return notesDao.fetchAllNotes(user);
 	}
 
 	@Override

@@ -81,7 +81,7 @@ public class Notes {
 	@Override
 	public String toString() {
 		return "Notes [id=" + id + ", createDate=" + createDate + ", modifiedDate=" + modifiedDate + ", title=" + title
-				+ ", description=" + description + ", user=" + user + "]";
+				+ ", description=" + description + "]";
 	}
 	
 	

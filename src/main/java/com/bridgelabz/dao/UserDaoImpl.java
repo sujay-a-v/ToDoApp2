@@ -78,17 +78,14 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User checkUserData(String email, String password) {
 		try{
-			System.out.println("L2");
 			Session session=sessionFactory.openSession();
 			Criteria criteria=session.createCriteria(User.class);
 			Criterion email1=Restrictions.eq("userEmail", email);
 			criteria.add(email1);
 			User user=(User) criteria.uniqueResult();
-			System.out.println("\n\n"+user);
 			session.close();
 				if(BCrypt.checkpw(password, user.getUserPassword()))
 				{
-					System.out.println("L3");
 					return user;
 				}
 			}
@@ -133,12 +130,10 @@ public class UserDaoImpl implements UserDao {
 		Session session=sessionFactory.openSession();
 		try
 		{
-			System.out.println("\n\nJAVA 12345\n\n");
 			Criteria criteria=session.createCriteria(User.class);
 			Criterion email1=Restrictions.eq("userEmail", email);
 			criteria.add(email1);
 			User user=(User) criteria.uniqueResult();
-			System.out.println("\n\n get user "+user);
 			session.close();
 			return user;
 		}
@@ -173,55 +168,4 @@ public class UserDaoImpl implements UserDao {
 		return "Password not set";  
 	}
 	
-	
-	@Override
-	public void addUserNotes(Notes notes) {
-		System.out.println("Inside add note impl");
-		Session session=sessionFactory.openSession();
-		Transaction transaction=session.beginTransaction();
-		
-		System.out.println("Session open");
-		try
-		{
-			System.out.println("Before");
-			session.save(notes);
-			transaction.commit();
-			session.close();
-			System.out.println("After");
-
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			transaction.rollback();
-			session.close();
-		}
-
-	}
-
-	@Override
-	public List<Notes> fetchAllNotes(User user) {
-		System.out.println("\n\nDeepak\n User Dao");
-		Session session=sessionFactory.openSession();
-		try
-		{
-			Criteria criteria=session.createCriteria(Notes.class);
-			criteria.add(Restrictions.eq("user", user));
-			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			List<Notes> list=criteria.list();
-			System.out.println(list.size());
-			/*for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i));
-			}*/
-			return list;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			session.close();
-		}
-		return null;
-	}
-	
-
 }
