@@ -75,6 +75,7 @@ public class UserController {
     }*/
 	
 	/*@PostMapping("save")*/
+	
 	@RequestMapping(value="/save",method = RequestMethod.POST)
 	public String doRegister(User user) {
 	    String valid=userValidation.userValidation(user);
@@ -109,17 +110,17 @@ public class UserController {
 	User noteUser=(User) session.getAttribute("user");
 	System.out.println("\n\n noteUser---> "+noteUser);
 	List<Notes> notes=notesService.fetchAllNotes(noteUser);
-	
+	Notes note=new Notes();
 	modelMap.put("user1", user1);
 	modelAndView.setViewName("home");
 	modelAndView.addObject("user1",user1);
 	modelAndView.addObject("notes",notes);
-	
+	modelAndView.addObject("note",note);
 	return modelAndView; 
 	}
 	
-	@RequestMapping(value="addNote",method = RequestMethod.POST)
-	public ResponseEntity<List<Notes>> addNote(@RequestBody Notes note,HttpSession session) {
+	/*@RequestMapping(value="addNote",method = RequestMethod.POST)
+	public ResponseEntity<List<Notes>> addNote(Notes note,HttpSession session) {
 		//User noteUser=(User) session.getAttribute("user");
 		
 		User noteUser=userService.getByEmail(email);
@@ -128,11 +129,11 @@ public class UserController {
 		note.setModifiedDate(date);
 		note.setUser(noteUser);
 		notesService.addUserNotes(note);
-		//SSystem.out.println("\n\n Notes from DB \n");
+		//System.out.println("\n\n Notes from DB \n");
 		List<Notes> notes=notesService.fetchAllNotes(noteUser);
 		System.out.println("Ajjayya");
 		return new ResponseEntity(notes,HttpStatus.OK);
-	}
+	}*/
 	
 	/*@RequestMapping("/allUser")
 	public List<User> getAllUser(){

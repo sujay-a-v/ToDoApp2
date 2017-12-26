@@ -3,6 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <link rel="stylesheet" th:href="@{/css/homeStyle.css}" />
+<script type="text/javascript" th:src="@{/script/noteCrud.js}"></script>
 <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -94,15 +95,19 @@
           <h4 class="modal-title">Add new Note</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
-         <b> <div  data-text="Title" contentEditable="true" id="title"></div></b>
+        <!--  <b> <div  data-text="Title" contentEditable="true" id="title"></div></b>
 							<br>
 		<div contentEditable="true" data-text="Take a note..." id="description" style="margin-bottom: 5px"></div>
-							<br>
+							<br> -->
+		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST">
+         <input type="text" th:field="*{title}" /><br/>
+		<input type="text" th:field="*{description}" /><br/>
+		<input type="submit" th:value="submit" />
+   </form>
         </div>
-        <div class="modal-footer">
+       <!--  <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+        </div> -->
       </div>
       
     </div>
@@ -117,6 +122,7 @@
 		<div th:each="note : ${notes}" id="card">
 		 	<div th:text="${note.title}"></div>
 		 	<div th:text="${note.description}"></div>
+		 	<button onclick="deleteNote('"+note+"')">Delete</button>
 		</div>
 		</div>
 			

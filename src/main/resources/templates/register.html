@@ -21,10 +21,11 @@
 <!-- 		<label th:if="${#fields.hasErrors('userName')}" th:text="#{error.user.name}" th:class="'error'">Name Error</label>
  -->		
  
- 		<input type="submit" th:value="#{user.form.submit}" />
-		<input type="reset" th:value="#{user.form.reset}" />
+ 		<input type="submit" th:value="submit" />
+		<input type="reset" th:value="reset" />
 		</div>
 	</form>
+	<a href="#" th:href="@{/}">Login</a>
 	</div>
 	<div class="col-sm-4"></div>
 	</div>
