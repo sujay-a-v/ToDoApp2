@@ -39,12 +39,12 @@ public class UserController {
 	@Autowired
 	private Token token;
 	
-	public static String email;
 	
 	@RequestMapping("/register")
 	public String registerForm(ModelMap modelMap) {
 		User user=new User();
 		modelMap.put("user", user);
+		
 		return "register";
 	}
 	
@@ -104,12 +104,8 @@ public class UserController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	email=user1.getUserEmail();
-	
 	session.setAttribute("user", user1);
-	User noteUser=(User) session.getAttribute("user");
-	System.out.println("\n\n noteUser---> "+noteUser);
-	List<Notes> notes=notesService.fetchAllNotes(noteUser);
+	List<Notes> notes=notesService.fetchAllNotes(user1);
 	Notes note=new Notes();
 	modelMap.put("user1", user1);
 	modelAndView.setViewName("home");
@@ -119,34 +115,7 @@ public class UserController {
 	return modelAndView; 
 	}
 	
-	/*@RequestMapping(value="addNote",method = RequestMethod.POST)
-	public ResponseEntity<List<Notes>> addNote(Notes note,HttpSession session) {
-		//User noteUser=(User) session.getAttribute("user");
-		
-		User noteUser=userService.getByEmail(email);
-		Date date = new Date();
-		note.setCreateDate(date);
-		note.setModifiedDate(date);
-		note.setUser(noteUser);
-		notesService.addUserNotes(note);
-		//System.out.println("\n\n Notes from DB \n");
-		List<Notes> notes=notesService.fetchAllNotes(noteUser);
-		System.out.println("Ajjayya");
-		return new ResponseEntity(notes,HttpStatus.OK);
-	}*/
-	
-	/*@RequestMapping("/allUser")
-	public List<User> getAllUser(){
-		
-		return Arrays.asList(
-				new User(1,"sujay","sujay.gmail.com","9900356542"),
-				new User(2,"manja","manja@gmail.com","8746021045")
-				
-				);
-		
-	}*/
-	
-	@RequestMapping(value="/createUser",method = RequestMethod.POST)
+	/*@RequestMapping(value="/createUser",method = RequestMethod.POST)
 	public void createUser(@RequestBody User user) {
 		userService.saveUser(user);
 		String accessToken=token.generateToken(user.getId());
@@ -155,6 +124,6 @@ public class UserController {
 	@RequestMapping("/getUser")
 	public List<User> getUser() {
 		return userService.getAllUser();
-	}
+	}*/
 	
 } 

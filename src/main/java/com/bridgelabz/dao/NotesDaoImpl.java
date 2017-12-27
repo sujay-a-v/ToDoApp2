@@ -3,9 +3,11 @@ package com.bridgelabz.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +42,26 @@ public class NotesDaoImpl implements NotesDao {
 
 	@Override
 	public void deleteUserNotes(int id) {
-		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction transaction=null;
+		try{
+			transaction=session.beginTransaction();
+			String sql="delete Notes where id =:id";
+			Query query=session.createQuery(sql);
+			query.setParameter("id", id);
+			query.executeUpdate();
+			transaction.commit();
+			System.out.println("deleted");
+		}
+		catch (Exception e) {
+			if(transaction!=null)
+				transaction.rollback();
+			
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
 
 	}
 
@@ -73,7 +94,19 @@ public class NotesDaoImpl implements NotesDao {
 
 	@Override
 	public Notes fetchById(int id) {
-		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		try
+		{
+			Criteria criteria=session.createCriteria(Notes.class);
+			Criterion criterion=Restrictions.eq("id", id);
+			criteria.add(criterion);
+			Notes notes=(Notes) criteria.uniqueResult();
+			System.out.println("delete 24323");
+			return notes;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

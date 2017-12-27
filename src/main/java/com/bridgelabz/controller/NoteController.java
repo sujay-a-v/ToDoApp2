@@ -2,7 +2,9 @@ package com.bridgelabz.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bridgelabz.pojo.Notes;
 import com.bridgelabz.pojo.User;
 import com.bridgelabz.service.NotesService;
+
 
 @Controller
 public class NoteController {
@@ -45,7 +50,11 @@ public class NoteController {
 	}*/
 	
 	@RequestMapping(value="addNote",method = RequestMethod.POST)
-	public ModelAndView addNote(Notes note,HttpSession session) {
+	public ModelAndView addNote(Notes note,HttpServletRequest request, HttpSession session) {
+		/*Notes note = new Notes();
+		Map<String, String[]> map = request.getParameterMap();
+		note.setDescription(map.get("description")[0]);
+		note.setTitle(map.get("title")[0]);*/
 		User noteUser=(User) session.getAttribute("user");
 		//User noteUser=userService.getByEmail(email);
 		Date date = new Date();
@@ -63,6 +72,33 @@ public class NoteController {
 		modelAndView.addObject("note",note);
 		
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE)
+	public ModelAndView deleteNote(@PathVariable int id,HttpSession session) {
+		
+		System.out.println("hdfgb");
+		System.out.println("\n\n note id "+id);
+		
+		Notes currentNote = notesService.fetchById(id);
+		if (currentNote == null) {
+			
+			return null;
+		}
+		System.out.println("not null");
+		notesService.deleteUserNotes(id);
+		User noteUser=(User) session.getAttribute("user");
+		List<Notes> notes=notesService.fetchAllNotes(noteUser);
+		System.out.println("Ajjayya 123");
+		ModelAndView modelAndView=new ModelAndView();
+		Notes note=new Notes();
+		modelAndView.setViewName("home");
+		modelAndView.addObject("user1",noteUser);
+		modelAndView.addObject("notes",notes);
+		modelAndView.addObject("note",note);
+		
+		return modelAndView;
+		
 	}
 
 }
