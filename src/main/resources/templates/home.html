@@ -12,15 +12,6 @@
 
 
 <title>ToDo</title>
-
-<!-- <script type="text/javascript">
-            function deleteNote(url) {
-                console.log(url);
-                alert(url);
-                
-            }
-</script> -->
-
 </head>
 <body id="body">
 <nav class="navbar navbar-inverse">
@@ -31,62 +22,44 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <!-- <a class="navbar-brand" ng-click="toggleSideBar()">
-			<span style="font-size: 25px; cursor: pointer">&#9776;</span></a>
-      <a class="navbar-brand"></a> -->
+      <a class="navbar-brand" onclick="toggleSideBar()">
+			<span style="font-size: 25px; margin-left: 50%; cursor: pointer">&#9776;</span></a>
+      <a class="navbar-brand">FunDo Keep</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-			<!-- <li><i class="glyphicons glyphicons-show-lines"></i></li>
-			<li ng-click="toggleSideBar()">
-			<span style="font-size: 25px; cursor: pointer">&#9776;</span></li>
-			<li><h4>{{navBarHeading}}</h4></li> -->
-			<!-- <li><span style="padding-top: 10px" class="glyphicon glyphicon-search"></span></li>
-			<li>
-				<div class="form-group">
-				<input type="text" id="search"  class="form-control" placeholder="Search" >
-						<button id="search" >Search</button>
-				</div>
-			</li> -->
-		</ul>
-      <!-- <ul class="nav navbar-nav navbar-right">
-		<li ng-click="ListViewToggle()"><img ng-if="!ListView" height="30px" alt="gride" src="images/gridView.svg">
-		<img ng-if="ListView" height="30px" alt="list" src="images/listView.svg"></li>
+       <ul class="nav navbar-nav navbar-right">
+		<!-- <li ng-click="ListViewToggle()"><img ng-if="!ListView" height="30px" alt="gride" src="images/gridView.svg">
+		<img ng-if="ListView" height="30px" alt="list" src="images/listView.svg"></li> -->
 			<li>
 				<div class="dropdown">
 					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
-						<img alt="{{User.userName.charAt(0)}}" class="img-circle" height="50" width="70" ng-src="{{User.profile}}" ><span class="glyphicon glyphicon-user"></span>
+						<!-- <img alt="{{User.userName.charAt(0)}}" class="img-circle" height="50" width="70" ng-src="{{User.profile}}" > -->
+						<span class="glyphicon glyphicon-user"></span>
 					</span>
 					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">
 						
-						<li     style="height: 150px;width: 200px;">
-						
-						 <img alt="{{User.userName.charAt(0)}}" title="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="80px" width="60px" ng-click="openImageUploader('user')">
-						<button ng-click="openImageUploader('user')">Change Profile</button>
-						<img alt="ChangeProfile" ng-click="openImageUploader('user')" src="" height="20px">
-						
-						 <input id="imageuploader" ng-show="false"  type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
-					<br/>
-						{{User.userName}}
-						{{User.userEmail}}
+						<li     style="height: 100px;width: 200px;">
+						<br/>
+						<div th:text="${user1.userName}"></div>
+						<div th:text="${user1.userEmail}"></div>
 						
 						</li>
-						<li><button ng-click="openImageUploader('user')" style="background-color: blue; color: white">Change Profile</button></li>
-						<li ng-click="logout()">logout</li>
+						<!-- <li><button ng-click="openImageUploader('user')" style="background-color: blue; color: white">Change Profile</button></li> -->
+						<li onclick="logout()">logout</li>
 					</ul>
 				</div>
 			</li>
-		</ul> -->
+		</ul>
     </div>
   </div>
 </nav>
 
 <br/><br/><br/><br/>
-<div  id="card">	
+<!-- <div  id="card">	
 
 		<div th:text="${user1.userName}"></div>
 		<div th:text="${user1.userEmail}"></div>
-		</div>
+		</div> -->
 		<br/>
 		
 <div class="container">
@@ -108,13 +81,13 @@
 							<br>
 		<div contentEditable="true" data-text="Take a note..." id="description" style="margin-bottom: 5px"></div>
 							<br> -->
-		<!-- <!-- <form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
-         <input type="text"  id="title" /><br/>
+<!-- 		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
+ -->         <input type="text"  id="title" /><br/>
 		<input type="text" id="description" /><br/>
-		<input type="button"  onclick="addNote()"/>
-   </form> -->
+		<input type="button"  onclick="addNote()" value="add"/>
+   <!-- </form> -->
    
-   <form action="#" th:action="@{/addNote}" th:object="${note}" method="POST">
+   <!-- <form action="#" th:action="@{/addNote}" th:object="${note}" method="POST">
          <input type="text" th:field="*{title}" /><br/>
 		<input type="text" th:field="*{description}" /><br/>
 		<input type="submit" th:value="submit" />
@@ -130,18 +103,55 @@
   </div>
   
 </div>
+</div>
 		
 		
 		
 		<div>
 		<h3>User Notes</h3>
 		<div th:each="note : ${notes}" id="card">
-		 	<div th:text="${note.title}"></div>
-		 	<div th:text="${note.description}"></div>
+		 	<div th:text="${note.title}" id="tit"></div>
+		 	<div th:text="${note.description}" id="deSs"></div>
 		 	<!-- <button th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
 		 	<button  th:onclick="'deleteNote('+ *{note.id} +')'">delete</button>
-		 	<button th:onclick="'done()'">done</button>
+		 	<button th:onclick="'edit('+ *{note.id} +')'">edit</button>
+		 	<button type="button"  data-toggle="modal" data-target="#editModal">Edit</button>
 		</div>
+		
+		
+		<!-- Modal -->
+  <div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Note</h4>
+        </div>
+        <div class="modal-body">
+        <!--  <b> <div  data-text="Title" contentEditable="true" id="title"></div></b>
+							<br>
+		<div contentEditable="true" data-text="Take a note..." id="description" style="margin-bottom: 5px"></div>
+							<br> -->
+<!-- 		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
+ -->         <input type="text"  id="title" th:text="${note.title}"/><br/>
+		<input type="text" id="description" th:text="${note.description}"/><br/>
+		<input type="button"  onclick="addNote()" value="Done"/>
+   <!-- </form> -->
+   
+   
+   
+        </div>
+       <!--  <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 			
 	<!-- 	<h1 >Note Details</h1>
     <table>
