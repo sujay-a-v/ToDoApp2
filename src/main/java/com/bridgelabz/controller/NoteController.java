@@ -76,9 +76,8 @@ public class NoteController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
 	public ModelAndView deleteNote(@PathVariable int id,HttpSession session) {
-		
 		Notes currentNote = notesService.fetchById(id);
 		if (currentNote == null) {
 			
@@ -98,15 +97,15 @@ public class NoteController {
 		
 	}
 	
-	@RequestMapping(value="/edit/{id}",method = RequestMethod.POST)
+	@RequestMapping(value="/edit/{id}",method = RequestMethod.GET)
 	public ModelAndView editNote(@PathVariable int id,HttpSession session) {
-		
+		System.out.println("Inside Edit");
 		User noteUser=(User) session.getAttribute("user");
 		Notes currentNote = notesService.fetchById(id);
 		//JSONObject editNote=currentNote;
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("home");
-		modelAndView.addObject("user1",noteUser);
+		modelAndView.setViewName("noteEdit");
+		//modelAndView.addObject("user1",noteUser);
 		modelAndView.addObject("note",currentNote);
 		return modelAndView;
 	}

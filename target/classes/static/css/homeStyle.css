@@ -3,7 +3,7 @@
 #card{
 	background-color:#e8e8e8;
 	min-height: 40px;
-	width:300px;
+	width: 25%;
 	padding:10px;
 	padding-bottom: 10px;
 	margin-top:10px;
@@ -60,4 +60,64 @@ div#title{
 	padding-top:5px;
 	height: 28px;
 	word-break: break-all;
+}
+
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ffff99;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    margin-top: 50px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.SideNavigation li{
+	 list-style-type:none;
+	 
+     margin-right: 15px;
+     margin-top: 10px;
+     display: block;
+     padding: 10px;
+
+}
+
+.SideNavigation a{
+	color: black;
+    display: block;
 }

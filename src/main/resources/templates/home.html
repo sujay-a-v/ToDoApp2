@@ -22,7 +22,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" onclick="toggleSideBar()">
+      <a class="navbar-brand" onclick="openNav()">
 			<span style="font-size: 25px; margin-left: 50%; cursor: pointer">&#9776;</span></a>
       <a class="navbar-brand">FunDo Keep</a>
     </div>
@@ -55,16 +55,41 @@
 </nav>
 
 <br/><br/><br/><br/>
-<!-- <div  id="card">	
 
-		<div th:text="${user1.userName}"></div>
-		<div th:text="${user1.userEmail}"></div>
-		</div> -->
-		<br/>
+<div id="mySidenav" class="sidenav">
+  <span type="button"  data-toggle="modal" data-target="#myModal" style="margin-left: -185px;">Add-Note</span>
+ <!--  <button type="button"  data-toggle="modal" data-target="#myModal">Add-Note</button>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+  
+  <ul >
+		<li><a href="#!/home">Notes</a></li>
+
+		<li><a href="#!/Reminder">Reminder</a></li>
+		style="margin-left: 35px;
+		<li style="margin-left: -20px;">Label <span ng-click="openAddNewLabel()" id="labelEdit">EDIT</span></li>
 		
+		<li ng-repeat="label in Listlabel">
+		<img alt="label" src="images/label.svg" height="20px" style="margin-right: 5px;">
+		<a ui-sref="LabelPage({labelName:label.labelName})">	{{label.labelName}}</a>
+		</li>
+		<li ng-click="openAddNewLabel()" style="margin-left: -20px;">Create new label</li>
+
+		<li><a href="#!/Trash">Trash</a></li>
+		
+		<li><a href="#!/Archive">Archive</a></li> -->
+
+	</ul>
+  
+  
+</div>
+<br/>
+<div id="myNote">	
 <div class="container">
   <!-- Trigger the modal with a button -->
-  <button type="button"  data-toggle="modal" data-target="#myModal">Add-Note</button>
+ <!--  <button type="button"  data-toggle="modal" data-target="#myModal">Add-Note</button> -->
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -113,9 +138,11 @@
 		 	<div th:text="${note.title}" id="tit"></div>
 		 	<div th:text="${note.description}" id="deSs"></div>
 		 	<!-- <button th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
-		 	<button  th:onclick="'deleteNote('+ *{note.id} +')'">delete</button>
-		 	<button th:onclick="'edit('+ *{note.id} +')'">edit</button>
-		 	<button type="button"  data-toggle="modal" data-target="#editModal">Edit</button>
+		 	<!-- <button  th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
+		 	<a th:href="${'/delete/' + note.id}" class="btn btn-danger">Delete</a>
+		 	<a th:href="${'/edit/' + note.id}" class="btn btn-default">Edit</a>
+		 	<!-- <button th:onclick="'edit('+ *{note.id} +')'">edit</button>
+		 	<button type="button"  data-toggle="modal" data-target="#editModal">Edit</button> -->
 		</div>
 		
 		
@@ -135,32 +162,21 @@
 		<div contentEditable="true" data-text="Take a note..." id="description" style="margin-bottom: 5px"></div>
 							<br> -->
 <!-- 		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
- -->         <input type="text"  id="title" th:text="${note.title}"/><br/>
-		<input type="text" id="description" th:text="${note.description}"/><br/>
-		<input type="button"  onclick="addNote()" value="Done"/>
+ -->      <input type="text"  id="titl" th:text="${note.title}"/><br/>
+		<input type="text" id="des" th:text="${note.description}"/><br/>
+		<input type="button"  onclick="update()" value="Done"/>
    <!-- </form> -->
    
    
    
         </div>
-       <!--  <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div> -->
       </div>
       
     </div>
   </div>
   
 </div>
-			
-	<!-- 	<h1 >Note Details</h1>
-    <table>
-         <tr th:each="note : ${notes}">
-        <td th:text="${note.title}">1</td>
-        <td th:text="${note.description}"></td>
-    </tr>  	
-	</table>			
-</div> -->
+</div>
 
 </body>
 

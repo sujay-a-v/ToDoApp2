@@ -15,7 +15,9 @@ function deleteNote(id) {
 function addNote(){
 	var note={};
 	note.title= $('#title').val();
+	alert("##title-->"+note.title);
 	note.description = $('#description').val();
+	alert("##description-->"+note.description);
 	
 	$.ajax({
 		type:'POST',
@@ -34,7 +36,9 @@ function addNote(){
 
 function edit(id) {
 	console.log(id);
+	alert("id "+id);
 	console.log("ABC");
+	alert("##title-->"+note.title);
 	var title=$('#tit').val();
 	var description = $('#des').val();
 	
@@ -49,5 +53,43 @@ function edit(id) {
 		console.log(result.note);
 	}
 	});
+	
+}
+
+function update(){
+	var note={};
+	note.title = $('#titl').val();
+	alert("##title-->"+note.title);
+	
+	note.description = $('#des').val();
+	alert("##description-->"+note.description);
+	
+	$.ajax({
+		type:'POST',
+		url:'addNote',
+		data: {
+			'title' : note.title,
+			'description' : note.description
+		},
+	success:function(result){
+		$('#editModal').modal('hide'),
+		console.log(result);
+	}
+	});
+}
+
+
+var showSideBar=false;
+function openNav() {
+	if(showSideBar==false){
+		showSideBar=true;
+    document.getElementById("mySidenav").style.paddingLeft = "250px";
+    document.getElementById("myNote").style.paddingLeft = "260px";
+    }
+	else{
+		showSideBar=false;
+	    document.getElementById("mySidenav").style.paddingLeft = "0";
+	    document.getElementById("myNote").style.paddingLeft = "10px";
+	}
 	
 }
