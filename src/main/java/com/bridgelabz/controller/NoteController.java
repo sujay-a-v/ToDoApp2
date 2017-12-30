@@ -99,15 +99,36 @@ public class NoteController {
 	
 	@RequestMapping(value="/edit/{id}",method = RequestMethod.GET)
 	public ModelAndView editNote(@PathVariable int id,HttpSession session) {
-		System.out.println("Inside Edit");
 		User noteUser=(User) session.getAttribute("user");
 		Notes currentNote = notesService.fetchById(id);
-		//JSONObject editNote=currentNote;
+		session.setAttribute("createTime", currentNote.getCreateDate());
 		ModelAndView modelAndView=new ModelAndView();
 		modelAndView.setViewName("noteEdit");
-		//modelAndView.addObject("user1",noteUser);
 		modelAndView.addObject("note",currentNote);
 		return modelAndView;
+	}
+	
+	@RequestMapping(value="/update",method = RequestMethod.POST)
+	public ModelAndView update(Notes note,HttpSession session)
+	{
+		User user=(User) session.getAttribute("user");
+		note.setUser(user);
+		Date date=new Date();
+		note.setModifiedDate(date);
+		Notes currentNote=notesService.fetchById(note.getId());
+		ModelAndView modelAndView=new ModelAndView();
+		if(currentNote!=null) {
+			Date date1=(Date) session.getAttribute("createTime");
+			note.setCreateDate(date1);
+			notesService.modifiedNotes(note.getId(), note);
+		}
+		modelAndView.setViewName("home");
+		modelAndView.addObject("user1",user);
+		List<Notes> notes=notesService.fetchAllNotes(user);
+		modelAndView.addObject("notes",notes);
+		modelAndView.addObject("note",note);
+		return modelAndView;
+		
 	}
 
 }

@@ -67,7 +67,19 @@ public class NotesDaoImpl implements NotesDao {
 
 	@Override
 	public void modifiedNotes(int id, Notes note) {
-		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction transaction=session.beginTransaction();
+		try
+		{
+			session.update(note);
+			transaction.commit();
+			session.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			session.close();
+		}
 
 	}
 
