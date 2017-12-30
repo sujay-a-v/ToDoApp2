@@ -136,6 +136,7 @@
 		<div>
 		<h3>User Notes</h3>
 		<div th:each="note : ${notes}" id="card">
+		<div th:if="${note.archive!='true'}"></div>
 		 	<div th:text="${note.title}" id="tit"></div>
 		 	<div th:text="${note.description}" id="deSs"></div>
 		 	<!-- <button th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->

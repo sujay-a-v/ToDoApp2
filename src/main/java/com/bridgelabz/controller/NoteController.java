@@ -79,7 +79,7 @@ public class NoteController {
 	}*/
 	
 	@RequestMapping(value="addNote",method = RequestMethod.POST)
-	public ModelAndView addNote(Notes note, HttpServletRequest request, HttpSession session) {
+	public String addNote(Notes note, HttpServletRequest request, HttpSession session) {
 		/*Notes note = new Notes();
 	//	note.setDescription(map.get("description")[0]);
 		note.setTitle(title);
@@ -100,7 +100,7 @@ public class NoteController {
 		modelAndView.addObject("notes",notes);
 		modelAndView.addObject("note",note);
 		
-		return modelAndView;
+		return "redirect:home";
 	}
 	
 	@RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
