@@ -2,22 +2,17 @@ package com.bridgelabz.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgelabz.pojo.Notes;
@@ -32,9 +27,16 @@ public class NoteController {
 	private NotesService notesService;
 	
 	@RequestMapping("/home")
-	public String homePage(ModelMap modelMap) {
+	public String homePage( HttpSession session) {
 		User user=new User();
-		modelMap.put("user", user);
+		User noteUser=(User) session.getAttribute("user");
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.addObject("user1",user);
+		List<Notes> notes=notesService.fetchAllNotes(noteUser);
+		modelAndView.addObject("notes",notes);
+		Notes note=new Notes();
+		modelAndView.addObject("note",note);
+		//modelMap.put("user", user);
 		return "home";
 	}
 	
@@ -51,7 +53,7 @@ public class NoteController {
 		
 	}*/
 	
-	@RequestMapping(value="addNote",method = RequestMethod.POST)
+	/*@RequestMapping(value="addNote",method = RequestMethod.POST)
 	public ModelAndView addNote(@RequestParam("title") String title, @RequestParam("description") String description, HttpServletRequest request, HttpSession session) {
 		Notes note = new Notes();
 	//	note.setDescription(map.get("description")[0]);
@@ -74,6 +76,31 @@ public class NoteController {
 		modelAndView.addObject("note",note);
 		
 		return modelAndView;
+	}*/
+	
+	@RequestMapping(value="addNote",method = RequestMethod.POST)
+	public ModelAndView addNote(Notes note, HttpServletRequest request, HttpSession session) {
+		/*Notes note = new Notes();
+	//	note.setDescription(map.get("description")[0]);
+		note.setTitle(title);
+		note.setDescription(description);*/
+		User noteUser=(User) session.getAttribute("user");
+		//User noteUser=userService.getByEmail(email);
+		Date date = new Date();
+		note.setCreateDate(date);
+		note.setModifiedDate(date);
+		note.setUser(noteUser);
+		notesService.addUserNotes(note);
+		//System.out.println("\n\n Notes from DB \n");
+		List<Notes> notes=notesService.fetchAllNotes(noteUser);
+		System.out.println("Ajjayya");
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("redirect:home");
+		modelAndView.addObject("user1",noteUser);
+		modelAndView.addObject("notes",notes);
+		modelAndView.addObject("note",note);
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
@@ -88,11 +115,11 @@ public class NoteController {
 		List<Notes> notes=notesService.fetchAllNotes(noteUser);
 		ModelAndView modelAndView=new ModelAndView();
 		Notes note=new Notes();
-		modelAndView.setViewName("home");
+		
 		modelAndView.addObject("user1",noteUser);
 		modelAndView.addObject("notes",notes);
 		modelAndView.addObject("note",note);
-		
+		modelAndView.setViewName("home");
 		return modelAndView;
 		
 	}
@@ -122,11 +149,48 @@ public class NoteController {
 			note.setCreateDate(date1);
 			notesService.modifiedNotes(note.getId(), note);
 		}
-		modelAndView.setViewName("home");
+		
 		modelAndView.addObject("user1",user);
 		List<Notes> notes=notesService.fetchAllNotes(user);
 		modelAndView.addObject("notes",notes);
 		modelAndView.addObject("note",note);
+		System.out.println(modelAndView.getViewName());
+		System.out.println("DDD ->"+modelAndView.wasCleared());
+		modelAndView.setViewName("home");
+		System.out.println(modelAndView.getViewName());
+		
+		return modelAndView;
+		
+	}
+	
+	@RequestMapping(value="/other/{opp}/{id}",method = RequestMethod.GET)
+	public ModelAndView otherFunction(@PathVariable("opp") int opp,@PathVariable("id") int id,HttpSession session) {
+		
+		Notes note=notesService.fetchById(id);
+		User user=(User) session.getAttribute("user");
+		note.setUser(user);
+		Date date=new Date();
+		note.setModifiedDate(date);
+		ModelAndView modelAndView=new ModelAndView();
+		if(opp==1) {
+			note.setArchive("true");
+		}else if(opp==2) {
+			note.setArchive("false");
+		}else if(opp==3){
+			note.setTrash("true");
+		}else if(opp==4) {
+			note.setTrash("false");
+		}else if(opp==5) {
+			
+		}
+		
+		notesService.modifiedNotes(note.getId(), note);
+		modelAndView.addObject("user1",user);
+		List<Notes> notes=notesService.fetchAllNotes(user);
+		modelAndView.addObject("notes",notes);
+		modelAndView.addObject("note",note);
+		modelAndView.setViewName("home");
+		//modelAndView.setView("home");
 		return modelAndView;
 		
 	}

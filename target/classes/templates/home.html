@@ -54,7 +54,7 @@
   </div>
 </nav>
 
-<br/><br/><br/><br/>
+<br/>
 
 <div id="mySidenav" class="sidenav">
   <span type="button"  data-toggle="modal" data-target="#myModal" style="margin-left: -185px;">Add-Note</span>
@@ -62,13 +62,15 @@
   <a href="#">About</a>
   <a href="#">Services</a>
   <a href="#">Clients</a>
-  <a href="#">Contact</a>
+  <a href="#">Contact</a> -->
   
   <ul >
-		<li><a href="#!/home">Notes</a></li>
+		<li ><a th:href="${'/home'}" style="margin-left: -253px;">Notes</a></li>
 
-		<li><a href="#!/Reminder">Reminder</a></li>
-		style="margin-left: 35px;
+		<li><a th:href="${'/Reminder'}" style="margin-left: -253px;">Reminder</a></li>
+		<li><a th:href="${'/Trash'}" style="margin-left: -253px;">Trash</a></li>
+		<li><a th:href="${'/Archive'}" style="margin-left: -253px;">Archive</a></li>
+		<!--style="margin-left: 35px;
 		<li style="margin-left: -20px;">Label <span ng-click="openAddNewLabel()" id="labelEdit">EDIT</span></li>
 		
 		<li ng-repeat="label in Listlabel">
@@ -85,7 +87,6 @@
   
   
 </div>
-<br/>
 <div id="myNote">	
 <div class="container">
   <!-- Trigger the modal with a button -->
@@ -106,11 +107,11 @@
 							<br>
 		<div contentEditable="true" data-text="Take a note..." id="description" style="margin-bottom: 5px"></div>
 							<br> -->
-<!-- 		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
- -->         <input type="text"  id="title" /><br/>
-		<input type="text" id="description" /><br/>
-		<input type="button"  onclick="addNote()" value="add"/>
-   <!-- </form> -->
+		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
+         <input type="text"  id="title" th:field="*{title}" /><br/>
+		<input type="text" id="description" th:field="*{description}" /><br/>
+		<input type="submit"  value="add"/>
+   </form>
    
    <!-- <form action="#" th:action="@{/addNote}" th:object="${note}" method="POST">
          <input type="text" th:field="*{title}" /><br/>
@@ -143,41 +144,58 @@
 		 	<a th:href="${'/edit/' + note.id}" class="btn btn-default">Edit</a>
 		 	<!-- <button th:onclick="'edit('+ *{note.id} +')'">edit</button>
 		 	<button type="button"  data-toggle="modal" data-target="#editModal">Edit</button> -->
+		 	<br/><br/>
+		 	<div id="moreOptions">
+
+					<div class="dropdown" style="float: left">
+						<img alt="reminder" th:src="@{images/reminder.svg}"
+							height="20px" style="margin-left: 0px">
+
+						<img alt="collaborator" th:src="@{images/collaborator.png}"
+							height="20px" style="margin-left: 0px">
+
+						<img alt="color" th:src="@{images/color.svg}"
+							height="20px" style="margin-left: 0px">
+
+						<img alt="image" th:src="@{images/image.svg}"
+							height="20px" onclick="openImageUploader(note)">
+							<!-- <input id="imageuploader" ng-show="false" type="file"
+							ng-file-select="onFileSelect($files)" ng-model="imageSrc"> -->
+
+					<a th:href="${'/other/1/' + note.id}"><span><img alt="archive"
+							th:src="@{images/archive.svg}" height="20px"></span></a>
+						
+						<!-- <img alt="more" th:src="@{images/more.svg}"
+							height="20px" style="margin-left: 0px"> -->
+
+					</div>
+					<div style="float: right" class="dropdown">
+	<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
+		<span class="glyphicon glyphicon-option-vertical"></span>
+	</span>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+		style="margin-left: 0px;">
+		<li><a ng-click="deleteNote(note)">Delete</a></li>
+<!-- 		<li><a  ng-click="removeCollborator(note,user)" ng-show="note.owner.userEmail!=user.userEmail">Remove myself</a></li>
+ -->		<li><a ng-click="copy(note)">Make a Copy</a></li>
+		<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
+
+		<!-- <li class="dropdown-submenu"><a class="test" tabindex="-1">Add Label</a>
+			<ul class="dropdown-menu">
+				<li ng-repeat="label in Listlabel"><input type="checkbox"
+					ng-click="toggleLabel(note,label)"
+					ng-checked="checkStatus(note,label)">{{label.labelName}}</li>
+			<li><input type="text" placeholder="Create new label" id="noteLabel" ng-model="userlabel"><span ng-click="addNoteLabel(note)">add</span></li>
+
+			</ul></li> -->
+	</ul>
+</div>
+				</div>
+		 	
 		</div>
-		
-		
-		<!-- Modal -->
-  <div class="modal fade" id="editModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Update Note</h4>
-        </div>
-        <div class="modal-body">
-        <!--  <b> <div  data-text="Title" contentEditable="true" id="title"></div></b>
-							<br>
-		<div contentEditable="true" data-text="Take a note..." id="description" style="margin-bottom: 5px"></div>
-							<br> -->
-<!-- 		<form action="#" th:action="@{/addNote}" th:object="${note}" method="POST"> 
- -->      <input type="text"  id="titl" th:text="${note.title}"/><br/>
-		<input type="text" id="des" th:text="${note.description}"/><br/>
-		<input type="button"  onclick="update()" value="Done"/>
-   <!-- </form> -->
-   
-   
-   
         </div>
       </div>
       
-    </div>
-  </div>
-  
-</div>
-</div>
-
 </body>
 
 </html>

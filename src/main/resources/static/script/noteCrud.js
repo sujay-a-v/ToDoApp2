@@ -88,8 +88,10 @@ function openNav() {
     }
 	else{
 		showSideBar=false;
-	    document.getElementById("mySidenav").style.paddingLeft = "0";
-	    document.getElementById("myNote").style.paddingLeft = "10px";
+		 document.getElementById("mySidenav").style.paddingLeft = "250px";
+		    document.getElementById("myNote").style.paddingLeft = "260px";
+	   /* document.getElementById("mySidenav").style.paddingLeft = "0";
+	    document.getElementById("myNote").style.paddingLeft = "10px";*/
 	}
 	
 }

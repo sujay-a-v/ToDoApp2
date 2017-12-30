@@ -14,3 +14,22 @@ table, th, td {
     border: 1px solid black;
 }
 
+/* input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #66ffff;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: 1px;
+    cursor: pointer;
+    width: 100%;
+} */
+

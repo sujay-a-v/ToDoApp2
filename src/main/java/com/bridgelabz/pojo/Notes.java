@@ -29,6 +29,58 @@ public class Notes {
 	@JsonIgnore
 	@JoinColumn(name="userId")
 	private User user;
+	
+	
+	private String reminder;
+	private String archive;
+	private String trash;
+	private String pin;
+	private String color;
+
+	public String getReminder() {
+		return reminder;
+	}
+
+	public void setReminder(String reminder) {
+		/*if(reminder.equals("true")||reminder.equals("false"))*/
+		this.reminder = reminder;
+	}
+
+	public String getArchive() {
+		return archive;
+	}
+
+	public void setArchive(String archive) {
+		if(archive.equals("true")|| archive.equals("false"))
+		this.archive = archive;
+	}
+
+	public String getTrash() {
+		return trash;
+	}
+
+	public void setTrash(String trash) {
+		if(trash.equals("true")|| trash.equals("false"))
+		this.trash = trash;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		if(pin.equals("true") || pin.equals("false"))
+			this.pin = pin;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		
+		this.color = color;
+	}
 
 	public int getId() {
 		return id;

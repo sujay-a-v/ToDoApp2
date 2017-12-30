@@ -79,6 +79,7 @@ body {
     transition: 0.5s;
     padding-top: 60px;
     margin-top: 50px;
+    margin-left: -40px;
 }
 
 .sidenav a {
@@ -92,6 +93,7 @@ body {
 
 .sidenav a:hover {
     color: #f1f1f1;
+    margin-left: -253px;
 }
 
 .sidenav .closebtn {
@@ -114,6 +116,7 @@ body {
      margin-top: 10px;
      display: block;
      padding: 10px;
+    /* // margin-left: -253px; */
 
 }
 
@@ -121,3 +124,22 @@ body {
 	color: black;
     display: block;
 }
+
+#moreOptions{
+	visibility: hidden;
+}
+
+#card:hover #moreOptions{
+	visibility:visible;
+}
+
+.dropdown-menu li:hover {
+	background-color: #e8e8e8;
+	 cursor: pointer;
+}
+
+
+.dropdown-submenu {
+    position: relative;
+}
+
