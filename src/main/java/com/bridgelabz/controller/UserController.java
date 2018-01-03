@@ -96,23 +96,23 @@ public class UserController {
 	
 	/*@PostMapping("/login")*/
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public ModelAndView doLogin(User user,HttpSession session) {
+	public String doLogin(User user,HttpSession session) {
 	ModelMap modelMap=new ModelMap();
 	User user1=userService.checkUserData(user.getUserEmail(), user.getUserPassword());
 	ModelAndView modelAndView=new ModelAndView();
 	if(user1==null) {
-		modelAndView.setViewName("login");
-		return modelAndView;
+		//modelAndView.setViewName("login");
+		return "redirect:/";
 	}
 	session.setAttribute("user", user1);
-	List<Notes> notes=notesService.fetchAllNotes(user1);
+	/*List<Notes> notes=notesService.fetchAllNotes(user1);
 	Notes note=new Notes();
 	modelMap.put("user1", user1);
 	modelAndView.setViewName("home");
 	modelAndView.addObject("user1",user1);
 	modelAndView.addObject("notes",notes);
-	modelAndView.addObject("note",note);
-	return modelAndView; 
+	modelAndView.addObject("note",note);*/
+	return "redirect:/home"; 
 	}
 	
 	/*@RequestMapping(value="/createUser",method = RequestMethod.POST)

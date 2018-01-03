@@ -79,7 +79,7 @@ function update(){
 }
 
 
-var showSideBar=false;
+var showSideBar=true;
 function openNav() {
 	if(showSideBar==false){
 		showSideBar=true;

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/homeStyle.css}" />
+<script type="text/javascript" th:src="@{/script/noteCrud.js}"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<title>ToDo</title>
+</head>
+<body id="body">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid" id="topNavigation"
+			style="background-color: #607D8B;">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" onclick="openNav()"> <span
+					style="font-size: 25px; margin-left: 50%; cursor: pointer">&#9776;</span></a>
+				<a class="navbar-brand">Archive</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<!-- <li ng-click="ListViewToggle()"><img ng-if="!ListView" height="30px" alt="gride" src="images/gridView.svg">
+		<img ng-if="ListView" height="30px" alt="list" src="images/listView.svg"></li> -->
+					<li>
+						<div class="dropdown">
+							<span class="btn dropdown-toggle" id="menu1" type="button"
+								data-toggle="dropdown"> <!-- <img alt="{{User.userName.charAt(0)}}" class="img-circle" height="50" width="70" ng-src="{{User.profile}}" > -->
+								<span class="glyphicon glyphicon-user"></span>
+							</span>
+							<ul class="dropdown-menu" role="menu"
+								style="background-color: white; padding-left: 10px"
+								aria-labelledby="menu1">
+
+								<li style="height: 100px; width: 200px;"><br />
+									<div th:text="${user1.userName}"></div>
+									<div th:text="${user1.userEmail}"></div></li>
+								<!-- <li><button ng-click="openImageUploader('user')" style="background-color: blue; color: white">Change Profile</button></li> -->
+								<li onclick="logout()">logout</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br />
+	<div class="row">
+	<!-- <div class="col-sm-3"> -->
+	<div id="mySidenav" class="sidenav">
+		<ul>
+			<li><a th:href="${'/home'}" style="margin-left: -253px;">Notes</a></li>
+			<li><a th:href="${'/Reminder'}" style="margin-left: -253px;">Reminder</a></li>
+			<li><a th:href="${'/Trash'}" style="margin-left: -253px;">Trash</a></li>
+			<li><a th:href="${'/Archive'}" style="margin-left: -253px;">Archive</a></li>	
+		</ul>
+	</div>
+	<!-- </div> class="col-sm-9"-->
+	<div id="myNote" >	
+		<div>
+			<h3>User Notes</h3>
+			<div th:each="note : ${notes}" id="card"
+				th:if="${note.archive=='true' && note.trash!='true'}">
+				<!-- <div th:if="${note.archive!='true'}"> -->
+				<div th:text="${note.title}" id="tit"></div>
+				<div th:text="${note.description}" id="deSs"></div>
+				<br />
+				<br />
+				<div id="moreOptions">
+					<div class="dropdown" style="float: left">
+						<img alt="reminder" th:src="@{images/reminder.svg}" height="20px"
+							style="margin-left: 0px"> <img alt="collaborator"
+							th:src="@{images/collaborator.png}" height="20px"
+							style="margin-left: 0px"> <img alt="color"
+							th:src="@{images/color.svg}" height="20px"
+							style="margin-left: 0px"> <img alt="image"
+							th:src="@{images/image.svg}" height="20px"
+							onclick="openImageUploader(note)">
+						<!-- <input id="imageuploader" ng-show="false" type="file"
+							ng-file-select="onFileSelect($files)" ng-model="imageSrc"> -->
+
+						<a th:href="${'/other/2/' + note.id}"><span><img
+								alt="archive" th:src="@{images/unarchive.svg}" height="20px"></span></a>
+					</div>
+					<div style="float: right" class="dropdown">
+						<span class="btn dropdown-toggle" id="menu1"
+							data-toggle="dropdown"> <span
+							class="glyphicon glyphicon-option-vertical"></span>
+						</span>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+							style="margin-left: 0px;">
+							<li><a th:href="${'/other/3/' + note.id}"
+								class="btn btn-danger">Delete</a></li>
+							<li><a th:href="${'/edit/' + note.id}"
+								class="btn btn-default">Edit</a></li>
+							<li><a th:href="${'/copy/' + note.id}">Make a Copy</a></li>
+							<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

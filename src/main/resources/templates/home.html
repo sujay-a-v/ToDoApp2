@@ -135,14 +135,14 @@
 		
 		<div>
 		<h3>User Notes</h3>
-		<div th:each="note : ${notes}" id="card">
-		<div th:if="${note.archive!='true'}"></div>
+		<div th:each="note : ${notes}" id="card" th:if="${note.archive!='true' && note.trash!='true'}">
+		<!-- <div th:if="${note.archive!='true'}"> -->
 		 	<div th:text="${note.title}" id="tit"></div>
 		 	<div th:text="${note.description}" id="deSs"></div>
 		 	<!-- <button th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
 		 	<!-- <button  th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
-		 	<a th:href="${'/delete/' + note.id}" class="btn btn-danger">Delete</a>
-		 	<a th:href="${'/edit/' + note.id}" class="btn btn-default">Edit</a>
+		 	<!-- <a th:href="${'/delete/' + note.id}" class="btn btn-danger">Delete</a>
+		 	<a th:href="${'/edit/' + note.id}" class="btn btn-default">Edit</a> -->
 		 	<!-- <button th:onclick="'edit('+ *{note.id} +')'">edit</button>
 		 	<button type="button"  data-toggle="modal" data-target="#editModal">Edit</button> -->
 		 	<br/><br/>
@@ -176,9 +176,11 @@
 	</span>
 	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
 		style="margin-left: 0px;">
-		<li><a ng-click="deleteNote(note)">Delete</a></li>
+		<!-- <li><a ng-click="deleteNote(note)">Delete</a></li> -->
+		<li><a th:href="${'/other/3/' + note.id}" class="btn btn-danger">Delete</a></li>
+		<li><a th:href="${'/edit/' + note.id}" class="btn btn-default">Edit</a></li>
 <!-- 		<li><a  ng-click="removeCollborator(note,user)" ng-show="note.owner.userEmail!=user.userEmail">Remove myself</a></li>
- -->		<li><a ng-click="copy(note)">Make a Copy</a></li>
+ -->		<li><a th:href="${'/copy/' + note.id}">Make a Copy</a></li>
 		<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
 
 		<!-- <li class="dropdown-submenu"><a class="test" tabindex="-1">Add Label</a>
@@ -194,6 +196,7 @@
 				</div>
 		 	
 		</div>
+		<!-- </div> -->
         </div>
       </div>
       
