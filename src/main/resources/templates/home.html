@@ -136,15 +136,8 @@
 		<div>
 		<h3>User Notes</h3>
 		<div th:each="note : ${notes}" id="card" th:if="${note.archive!='true' && note.trash!='true'}">
-		<!-- <div th:if="${note.archive!='true'}"> -->
 		 	<div th:text="${note.title}" id="tit"></div>
 		 	<div th:text="${note.description}" id="deSs"></div>
-		 	<!-- <button th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
-		 	<!-- <button  th:onclick="'deleteNote('+ *{note.id} +')'">delete</button> -->
-		 	<!-- <a th:href="${'/delete/' + note.id}" class="btn btn-danger">Delete</a>
-		 	<a th:href="${'/edit/' + note.id}" class="btn btn-default">Edit</a> -->
-		 	<!-- <button th:onclick="'edit('+ *{note.id} +')'">edit</button>
-		 	<button type="button"  data-toggle="modal" data-target="#editModal">Edit</button> -->
 		 	<br/><br/>
 		 	<div id="moreOptions">
 

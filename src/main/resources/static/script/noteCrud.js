@@ -81,6 +81,7 @@ function update(){
 
 var showSideBar=true;
 function openNav() {
+	if(screen.width>1000){
 	if(showSideBar==false){
 		showSideBar=true;
     document.getElementById("mySidenav").style.paddingLeft = "250px";
@@ -92,6 +93,7 @@ function openNav() {
 		    document.getElementById("myNote").style.paddingLeft = "260px";
 	   /* document.getElementById("mySidenav").style.paddingLeft = "0";
 	    document.getElementById("myNote").style.paddingLeft = "10px";*/
+	}
 	}
 	
 }
