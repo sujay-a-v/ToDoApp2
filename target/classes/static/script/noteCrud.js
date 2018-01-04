@@ -46,8 +46,8 @@ function edit(id) {
 	success:function(result){
 		console.log();
 		console.log(result);
-		$("#noteModelHolder").html(result);
-		$("#noteModel").modal("show");
+		$("#noteModalHolder").html(result);
+		$("#noteModal").modal("show");
 	}
 	});
 	

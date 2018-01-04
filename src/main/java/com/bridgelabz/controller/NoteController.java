@@ -146,7 +146,9 @@ public class NoteController {
 			notesService.modifiedNotes(note.getId(), note);
 			return "redirect:/Trash";
 		}else if(opp==5) {
-			
+			note.setPin("true");
+		}else if(opp==6) {
+			note.setPin("false");
 		}
 		notesService.modifiedNotes(note.getId(), note);
 		return "redirect:/home";
