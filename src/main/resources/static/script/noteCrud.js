@@ -38,19 +38,16 @@ function edit(id) {
 	console.log(id);
 	alert("id "+id);
 	console.log("ABC");
-	alert("##title-->"+note.title);
-	var title=$('#tit').val();
-	var description = $('#des').val();
+	
 	
 	$.ajax({
-   	 type : 'POST',  
-        url : "/edit/"+id,
-        data: {
-			
-		},
+        url : "/note/"+id,
+       
 	success:function(result){
-		
-		console.log(result.note);
+		console.log();
+		console.log(result);
+		$("#noteModalHolder").html(result);
+		$("#noteModal").modal("show");
 	}
 	});
 	
@@ -81,7 +78,7 @@ function update(){
 
 var showSideBar=true;
 function openNav() {
-	if(screen.width>1000){
+	/*if(screen.width>1000){*/
 	if(showSideBar==false){
 		showSideBar=true;
     document.getElementById("mySidenav").style.paddingLeft = "250px";
@@ -91,9 +88,9 @@ function openNav() {
 		showSideBar=false;
 		 document.getElementById("mySidenav").style.paddingLeft = "250px";
 		    document.getElementById("myNote").style.paddingLeft = "260px";
-	   /* document.getElementById("mySidenav").style.paddingLeft = "0";
-	    document.getElementById("myNote").style.paddingLeft = "10px";*/
+	    document.getElementById("mySidenav").style.paddingLeft = "0";
+	    document.getElementById("myNote").style.paddingLeft = "10px";
 	}
-	}
+	/*}*/
 	
 }

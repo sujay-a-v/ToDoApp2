@@ -184,4 +184,12 @@ public class NoteController {
 		modelAndView.addObject("notes",notes);
 		return modelAndView;
 	}
+	
+	@RequestMapping("/note/{id}")
+	public String editModel(@PathVariable("id") int id,ModelMap madelMap) {
+		Notes note = notesService.fetchById(id);
+		madelMap.addAttribute("note", notesService.fetchById(id));
+		System.out.println("34435r%%$");
+		return "/home :: modalContents";
+	}
 }
