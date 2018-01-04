@@ -149,8 +149,33 @@
 		 	<div id="moreOptions">
 
 					<div class="dropdown" style="float: left">
-						<img alt="reminder" th:src="@{images/reminder.svg}"
-							height="20px" style="margin-left: 0px">
+						<!-- <img alt="reminder" th:src="@{images/reminder.svg}"
+							height="20px" style="margin-left: 0px">  -->
+							
+							<span class="btn dropdown-toggle" id="menuRemind"
+							data-toggle="dropdown"> <img alt="reminder"
+							th:src="@{images/reminder.svg}" height="20px" style="padding: 0px;">
+						</span>
+
+						<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
+							<li><input type="date" name="bday" ng-attr-id="datepicker{{note.id}}"
+								class="reminder" ng-click="openReminder(note)"
+								ng-model="note.reminderStatus"></li>
+							<li><div ng-click="openReminder(note)">
+									<span>Pick Date & time</span>
+								</div></li>
+							<li><div ng-click="reminder(note,'today')">
+									<span>Later today</span>
+								</div></li>
+							<li><div ng-click="reminder(note,'tommorow')">
+									<span>Tommorow 8AM</span>
+								</div></li>
+							<li><div ng-click="reminder(note,'nextweek')">
+									<span>Next week</span>
+								</div></li>
+						</ul>
+
+
 
 						<img alt="collaborator" th:src="@{images/collaborator.png}"
 							height="20px" style="margin-left: 0px">
