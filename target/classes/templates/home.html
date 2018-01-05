@@ -7,11 +7,34 @@
 <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+ <!--  <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 <title>ToDo</title>
+
+ <script type="text/javascript">
+$('#date').datepicker({ 
+	dateFormat: 'dd-mm-yyyy' 
+	}); 
+
+	
+	/* $(function () {
+		   var bindDatePicker = function() {
+				$(".date").datetimepicker({
+		        format:'dd-mm-yyyy',
+					
+				})
+		   bindDatePicker();
+		 }); */
+</script>
+
 </head>
 <body id="body">
 <nav class="navbar navbar-inverse">
@@ -129,23 +152,29 @@
 		
 		
 		<div class="row">
-		<h3>Pin Notes</h3>
+		<div >Pin Notes</div>
 		<div th:each="note : ${notes}" id="card" th:if="${note.archive!='true' && note.trash!='true' && note.pin=='true'}">
 		
 		<div id="moreOptions" style="float: right">
 		 
 		 <a th:href="${'/other/6/' + note.id}"><span><img alt="pin"
 							th:src="@{images/bluepin.svg}" height="20px"></span></a>
-		 
-							<!-- <span style="cursor: pointer"
-								ng-click="note.pin=true; updateNote(note)"> 
-								<img alt="pin" style="height: 17px" src="images/bluepin.svg"></img>
-							</span> -->
 					</div>
 		
 		 	<div th:text="${note.title}" id="tit"></div>
 		 	<div th:text="${note.description}" id="deSs"></div>
-		 	<br/><br/>
+		 	
+
+
+				<div class="input-group date" data-provide="datepicker">
+					<input type="text" class="form-control" id="date" name="date"></input>
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-th"></span>
+					</div>
+				</div>
+
+				<br/><br/>
+				<div th:if="${note.reminder!=''}" th:text="${note.reminder}"></div>
 		 	<div id="moreOptions">
 
 					<div class="dropdown" style="float: left">
@@ -158,20 +187,19 @@
 						</span>
 
 						<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
-							<li><input type="date" name="bday" ng-attr-id="datepicker{{note.id}}"
-								class="reminder" ng-click="openReminder(note)"
-								ng-model="note.reminderStatus"></li>
-							<li><div ng-click="openReminder(note)">
-									<span>Pick Date & time</span>
+							<li><input type="date" name="bday" id="datepicker"
+								class="reminder" ></li>
+							<!-- <li><div th:onclick="'addReminder('+ *{note.id} +')'">
+									<span>add</span>
 								</div></li>
-							<li><div ng-click="reminder(note,'today')">
-									<span>Later today</span>
-								</div></li>
-							<li><div ng-click="reminder(note,'tommorow')">
+							<li><div th:onclick="'laterToday('+ *{note.id} +')'">
 									<span>Tommorow 8AM</span>
+								</div></li> -->
+							<li><div><a th:href="${'/reminder/2/' + note.id}">
+									<span>Tommorow 8AM</span></a>
 								</div></li>
-							<li><div ng-click="reminder(note,'nextweek')">
-									<span>Next week</span>
+							<li><div ><a th:href="${'/reminder/1/' + note.id}">
+									<span>Next week</span></a>
 								</div></li>
 						</ul>
 
@@ -256,6 +284,26 @@
 		 	<div th:text="${note.title}" id="tit"></div>
 		 	<div th:text="${note.description}" id="deSs"></div>
 		 	<br/><br/>
+		 	
+		 	
+		 	<!-- <div class="container">
+  <div class="row">
+    Date formats: yyyy-mm-dd, yyyymmdd, dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+  </div>
+  <br />
+    <div class="row">
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+		 	<div th:if="${note.reminder!=''}" th:text="${note.reminder}"></div>
 		 	<div id="moreOptions">
 
 					<div class="dropdown" style="float: left">

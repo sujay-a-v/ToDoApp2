@@ -94,3 +94,37 @@ function openNav() {
 	/*}*/
 	
 }
+
+function addReminder(id){
+	var reminder=$('#datepicker').val();
+	$.ajax({
+        url : "/reminder/"+id,
+        data:{
+        	'reminder':reminder
+        },
+	success:function(result){
+		console.log("SA");
+		console.log(result);
+		
+	}
+	});
+	
+}
+function laterToday(id){
+	var date=new Date();
+	var month=date.getMonth()+1;
+	var year=date.getFullYear();
+	var tommorow=date.getDate()+1;
+	var tommorowDate=(tommorow+"/"+month+"/"+year);
+	var reminder=tommorowDate+" 8:00AM";
+	console.log("Reminder --> "+reminder);
+	$.ajax({
+        url : "/reminder/"+id,
+        data:{
+        	'reminder':reminder
+        },
+	success:function(result){
+	}
+	});
+	
+}

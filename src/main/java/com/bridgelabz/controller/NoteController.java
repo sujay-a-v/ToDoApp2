@@ -1,5 +1,6 @@
 package com.bridgelabz.controller;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bridgelabz.pojo.Notes;
@@ -193,5 +195,63 @@ public class NoteController {
 		madelMap.addAttribute("note", notesService.fetchById(id));
 		System.out.println("34435r%%$");
 		return "/home :: modalContents";
+	}
+	
+	@RequestMapping("/reminder/{id}")
+	public String addReminder(@PathVariable("id") int id,@RequestParam("reminder") String reminder) {
+		System.out.println("reminder ---> "+ reminder);
+		Notes note = notesService.fetchById(id);
+		note.setReminder(reminder);
+		notesService.modifiedNotes(note.getId(), note);
+		
+		System.out.println("34435r%%$");
+		System.out.println("Rwjvnf");
+		return "redirect:/home";
+	}
+	
+	
+	@RequestMapping(value="/reminder/{opp}/{id}",method = RequestMethod.GET)
+	public String addReminder(@PathVariable("opp") int opp,@PathVariable("id") int id,HttpSession session) {
+		
+		Notes note=notesService.fetchById(id);
+		User user=(User) session.getAttribute("user");
+		note.setUser(user);
+		Date date=new Date();
+		note.setModifiedDate(date);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		int year = cal.get(Calendar.YEAR);
+		String year1=Integer.toString(year);
+		int month = cal.get(Calendar.MONTH)+1;
+		String month1=Integer.toString(month);
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		if(opp==1) {
+			int nextWeek=day+7;
+			String nextWeek1=Integer.toString(nextWeek);
+			String reminder=nextWeek1+"/"+month1+"/"+year1;
+			reminder=reminder+" 8AM";
+			System.out.println("\n\n"+reminder+"\n\n");
+			note.setReminder(reminder);
+		}else if(opp==2) {
+			int tommorow=day+1;
+			String tommorow1=Integer.toString(tommorow);
+			String reminder=tommorow1+"/"+month1+"/"+year1;
+			reminder=reminder+" 8AM";
+			System.out.println("\n\n"+reminder+"\n\n");
+			note.setReminder(reminder);
+		}else if(opp==3){
+			note.setTrash("true");
+		}else if(opp==4) {
+			note.setTrash("false");
+			notesService.modifiedNotes(note.getId(), note);
+			return "redirect:/Trash";
+		}else if(opp==5) {
+			note.setPin("true");
+		}else if(opp==6) {
+			note.setPin("false");
+		}
+		notesService.modifiedNotes(note.getId(), note);
+		return "redirect:/home";
+		
 	}
 }
