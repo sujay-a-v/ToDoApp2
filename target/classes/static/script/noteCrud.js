@@ -128,3 +128,61 @@ function laterToday(id){
 	});
 	
 }
+
+
+function addColor(color){
+	console.log("color"+color);
+}
+
+var colors=[
+	
+	{
+		"color":'#ffffff',
+		"path":'images/white.png'
+	},
+	
+	{
+		"color":'#1a53ff',
+		"path":'images/darkblue.png'
+	},
+	{
+		"color":'#9966ff',
+		"path":'images/purple.png'
+	},
+	{
+		"color":'#ff99cc',
+		"path":'images/pink.png'
+	},
+	{
+		"color":'#d9b38c',
+		"path":'images/brown.png'
+	},
+	{
+		"color":'#e74c3c',
+		"path":'images/Red.png'
+	},
+	{
+		"color":'#ff8c1a',
+		"path":'images/orange.png'
+	},
+	{
+		"color":'#fcff77',
+		"path":'images/yellow.png'
+	},
+	{
+		"color":'#80ff80',
+		"path":'images/green.png'
+	},
+	{
+		"color":'#99ffff',
+		"path":'images/skyblue.png'
+	},
+	{
+		"color":'#0099ff',
+		"path":'images/blue.png'
+	},
+	{
+		"color":'#bfbfbf',
+		"path":'images/grey.png'
+	}
+];

@@ -175,6 +175,10 @@ $('#date').datepicker({
 
 				<br/><br/>
 				<div th:if="${note.reminder!=''}" th:text="${note.reminder}"></div>
+				<div th:each="color : ${colors}">
+					<button th:onclick="'addColor('+*color.color+')'">color</button>
+				</div>
+				
 		 	<div id="moreOptions">
 
 					<div class="dropdown" style="float: left">
@@ -257,7 +261,7 @@ $('#date').datepicker({
 		
 		<div class="row">
 		<h3>Other Notes</h3>
-		<div th:each="note : ${notes}" id="card" th:if="${note.archive!='true' && note.trash!='true' && note.pin!='true'}">
+		<div th:each="note : ${notes}" id="card" th:if="${note.archive!='true' && note.trash!='true' && note.pin!='true'}" th:style="'background-color: '+${note.color} +';'">
 		<!-- 
 		<div id="moreOptions" style="float: right">
 		 
