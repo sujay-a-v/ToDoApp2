@@ -19,7 +19,8 @@ public class MVCconfigure extends WebMvcConfigurerAdapter{
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/Archive").setViewName("Archive");
         registry.addViewController("/Trash").setViewName("Trash");
-        
+        registry.addViewController("/docDetails").setViewName("docDetails");
+        registry.addViewController("/AddDetails").setViewName("AddDetails");
     }
 
 }

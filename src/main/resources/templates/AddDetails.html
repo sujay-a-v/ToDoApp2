@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<p>AddDetails</p>
+<div class="row" style="width:1300px">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4" style="background-color: rgb(66, 203, 244); margin-top: 50px;" >
+	<h1>Create</h1>
+	<form action="#" th:action="@{/saveDetails}" th:object="${details}" method="POST">
+	<div class="form-group" style="margin-left: 5px">
+		Name: <input type="text" th:field="*{docName}" /><br/>
+		Type: <input type="text" th:field="*{docType}" /><br/>
+		<!-- Mobile: <input type="text" th:field="*{userMobile}" /><br/>
+		Password: <input type="password" th:field="*{userPassword}" /><br/>
+		ConfirmPassword: <input type="password" th:field="*{confirmPassword}" /><br/> -->
+<!-- 		<label th:if="${#fields.hasErrors('userName')}" th:text="#{error.user.name}" th:class="'error'">Name Error</label>
+ -->		
+ 
+ 		<input type="submit" th:value="submit" />
+		<input type="reset" th:value="reset" />
+		</div>
+	</form>
+	<a href="#" th:href="@{/}">Login</a>
+	</div>
+	<div class="col-sm-4"></div>
+	</div>
+</body>
+</html>
