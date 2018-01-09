@@ -3,14 +3,29 @@
 <head>
 <title>ToDo</title>
       <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="row" style="width:1300px">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4" style="background-color: rgb(66, 203, 244); margin-top: 50px;" >
    <form action="#" th:action="@{/login}" th:object="${user}" method="POST">
-        Email: <input type="text" th:field="*{userEmail}" /><br/>
-		Password: <input type="password" th:field="*{userPassword}" /><br/>
-		<input type="submit" th:value="submit" />
+       <div class="form-group">
+	      <label for="email">Email:</label>
+	      <input type="text" th:field="*{userEmail}" class="form-control" id="email" placeholder="Enter email" name="email">
+	    </div>
+		<div class="form-group">
+	      <label for="password">Password:</label>
+	      <input type="password" th:field="*{userPassword}" class="form-control" id="password" placeholder="Enter Password" name="password">
+	    </div>
+		<input type="submit" th:value="submit" class="btn btn-default"/>
    </form>
    
 	<a href="#" th:href="@{/register}">Register</a>
+	</div>
+	<div class="col-sm-4"></div>
+	</div>
 </body>
 </html>   

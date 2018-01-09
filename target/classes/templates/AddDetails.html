@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ToDo</title>
+<link rel="stylesheet" th:href="@{/css/styles.css}" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p>AddDetails</p>
 <div class="row" style="width:1300px">
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4" style="background-color: rgb(66, 203, 244); margin-top: 50px;" >
-	<h1>Create</h1>
+	<h1>Insert Details</h1>
 	<form action="#" th:action="@{/saveDetails}" th:object="${details}" method="POST">
 	<div class="form-group" style="margin-left: 5px">
-		Name: <input type="text" th:field="*{docName}" /><br/>
-		Type: <input type="text" th:field="*{docType}" /><br/>
-		<!-- Mobile: <input type="text" th:field="*{userMobile}" /><br/>
-		Password: <input type="password" th:field="*{userPassword}" /><br/>
-		ConfirmPassword: <input type="password" th:field="*{confirmPassword}" /><br/> -->
-<!-- 		<label th:if="${#fields.hasErrors('userName')}" th:text="#{error.user.name}" th:class="'error'">Name Error</label>
- -->		
- 
- 		<input type="submit" th:value="submit" />
-		<input type="reset" th:value="reset" />
+		<!-- Name: <input type="text" th:field="*{docName}" /><br/> -->
+		<div class="form-group">
+	      <input type="text" th:field="*{docName}" class="form-control" id="name" placeholder="Enter Name" name="name">
+	    </div>
+	    <div class="form-group">
+	      <input type="text" th:field="*{docType}" class="form-control" id="type" placeholder="Enter Type" name="type">
+	    </div>
+	    <div class="form-group">
+	      <input type="text" th:field="*{docAmount}" class="form-control" id="docAmount" placeholder="Enter DocAmount" name="docAmount">
+	    </div>
+	    <div class="form-group">
+	      <input type="text" th:field="*{tax}" class="form-control" id="tax" placeholder="Enter Tax" name="tax">
+	    </div>
+	    <div class="form-group">
+	      <input type="text" th:field="*{taxtype}" class="form-control" id="taxtype" placeholder="Enter taxtype" name="taxtype">
+	    </div>
+		<!-- Type: <input type="text" th:field="*{docType}" /><br/> -->
+ 		<input type="submit" th:value="submit" style="float: right;" class="btn btn-default"/>
 		</div>
 	</form>
-	<a href="#" th:href="@{/}">Login</a>
 	</div>
 	<div class="col-sm-4"></div>
 	</div>

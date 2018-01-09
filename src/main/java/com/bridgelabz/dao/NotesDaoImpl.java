@@ -113,7 +113,6 @@ public class NotesDaoImpl implements NotesDao {
 			Criterion criterion=Restrictions.eq("id", id);
 			criteria.add(criterion);
 			Notes notes=(Notes) criteria.uniqueResult();
-			System.out.println("delete 24323");
 			return notes;
 		}
 		catch (Exception e) {

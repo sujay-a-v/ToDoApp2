@@ -5,6 +5,8 @@
 <title>ToDo</title>
 <link rel="stylesheet" th:href="@{/css/styles.css}" />
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="row" style="width:1300px">
@@ -13,16 +15,38 @@
 	<h1>Create</h1>
 	<form action="#" th:action="@{/save}" th:object="${user}" method="POST">
 	<div class="form-group" style="margin-left: 5px">
-		Name: <input type="text" th:field="*{userName}" /><br/>
-		Email: <input type="text" th:field="*{userEmail}" /><br/>
-		Mobile: <input type="text" th:field="*{userMobile}" /><br/>
+		<!-- Name: <input type="text" th:field="*{userName}" /><br/> -->
+		<div class="form-group">
+	      <label for="name">Name:</label>
+	      <input type="text" th:field="*{userName}" class="form-control" id="name" placeholder="Enter Name" name="name">
+	    </div>
+		<div class="form-group">
+	      <label for="email">Email:</label>
+	      <input type="text" th:field="*{userEmail}" class="form-control" id="email" placeholder="Enter email" name="email">
+	    </div>
+	    <div class="form-group">
+	      <label for="mobile">Mobile:</label>
+	      <input type="text" th:field="*{userMobile}" class="form-control" id="mobile" placeholder="Enter Mobile" name="mobile">
+	    </div>
+	    <div class="form-group">
+	      <label for="password">Password:</label>
+	      <input type="password" th:field="*{userPassword}" class="form-control" id="password" placeholder="Enter Password" name="password">
+	    </div>
+	    <div class="form-group">
+	      <label for="confirmpassword">ConfirmPassword:</label>
+	      <input type="text" th:field="*{userEmail}" class="form-control" id="ConfirmPassword" placeholder="Enter ConfirmPassword" name="ConfirmPassword">
+	    </div>
+		
+		<!-- Email: <input  th:field="*{userEmail}" /><br/> -->
+		<!-- Mobile: <input type="text" th:field="*{userMobile}" /><br/>
 		Password: <input type="password" th:field="*{userPassword}" /><br/>
-		ConfirmPassword: <input type="password" th:field="*{confirmPassword}" /><br/>
+		ConfirmPassword: <input type="password" th:field="*{confirmPassword}" /><br/> -->
 <!-- 		<label th:if="${#fields.hasErrors('userName')}" th:text="#{error.user.name}" th:class="'error'">Name Error</label>
  -->		
  
- 		<input type="submit" th:value="submit" />
-		<input type="reset" th:value="reset" />
+ 		
+		<input type="reset" th:value="reset" class="btn btn-default"/>
+		<input type="submit" th:value="submit" class="btn btn-default" style="float: right;"/>
 		</div>
 	</form>
 	<a href="#" th:href="@{/}">Login</a>
